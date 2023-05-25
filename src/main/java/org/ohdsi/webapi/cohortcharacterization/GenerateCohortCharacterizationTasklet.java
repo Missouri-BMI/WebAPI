@@ -25,12 +25,14 @@ import org.ohdsi.webapi.cohortcharacterization.converter.SerializedCcToCcConvert
 import org.ohdsi.webapi.cohortcharacterization.domain.CohortCharacterizationEntity;
 import org.ohdsi.webapi.cohortcharacterization.repository.AnalysisGenerationInfoEntityRepository;
 import org.ohdsi.webapi.common.generation.AnalysisTasklet;
+import org.ohdsi.webapi.evidence.negativecontrols.NegativeControlTasklet;
 import org.ohdsi.webapi.source.SourceService;
 import org.ohdsi.webapi.shiro.Entities.UserEntity;
 import org.ohdsi.webapi.shiro.Entities.UserRepository;
 import org.ohdsi.webapi.source.Source;
 import org.ohdsi.webapi.util.CancelableJdbcTemplate;
 import org.ohdsi.webapi.util.SourceUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -45,6 +47,7 @@ public class GenerateCohortCharacterizationTasklet extends AnalysisTasklet {
     private final CcService ccService;
     private final SourceService sourceService;
     private final UserRepository userRepository;
+    private static final Logger log = LoggerFactory.getLogger(GenerateCohortCharacterizationTasklet.class);
 
     public GenerateCohortCharacterizationTasklet(
             final CancelableJdbcTemplate jdbcTemplate,
@@ -75,11 +78,15 @@ public class GenerateCohortCharacterizationTasklet extends AnalysisTasklet {
         final String cohortTable = jobParams.get(TARGET_TABLE).toString();
         final String sessionId = jobParams.get(SESSION_ID).toString();
         final String tempSchema = SourceUtils.getTempQualifier(source);
-        CCQueryBuilder ccQueryBuilder = new CCQueryBuilder(cohortCharacterization, cohortTable, sessionId,
-                SourceUtils.getCdmQualifier(source), SourceUtils.getResultsQualifier(source),
-                SourceUtils.getVocabularyQualifier(source), tempSchema, jobId);
+        final String resSchema = SourceUtils.getResultsQualifier(source);
+        final String vocSchema = SourceUtils.getVocabularyQualifier(source);
+        final String cdmSchema = SourceUtils.getCdmQualifier(source);
+        log.info("Source config: " + vocSchema + ", " + resSchema + ", " + cdmSchema);
+        CCQueryBuilder ccQueryBuilder = new CCQueryBuilder(cohortCharacterization, cohortTable, sessionId, cdmSchema
+                , resSchema, vocSchema
+                , tempSchema, jobId);
         String sql = ccQueryBuilder.build();
-
+        log.info("Initial GenerateCohortCharacterizationTasklet: " + sql);
         /*
          * There is an issue with temp tables on sql server: Temp tables scope is session or stored procedure.
          * To execute PreparedStatement sql server uses stored procedure <i>sp_executesql</i>
@@ -112,6 +119,7 @@ public class GenerateCohortCharacterizationTasklet extends AnalysisTasklet {
         }
 
         final String translatedSql = SqlTranslate.translateSql(sql, source.getSourceDialect(), sessionId, tempSchema);
+        log.info("Translated GenerateCohortCharacterizationTasklet: " + translatedSql);
         return SqlSplit.splitSql(translatedSql);
     }
 
