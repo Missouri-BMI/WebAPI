@@ -2,31 +2,7 @@ FROM maven:3.6-jdk-11 as builder
 
 WORKDIR /code
 
-# ARG ATLAS_URL=http://localhost/atlas/
-# ARG WEBAPI_URL=http://localhost:8080/WebAPI/
-# ARG WEBAPI_DB=jdbc:postgresql://localhost:5432/ohdsi_webapi
-# ARG WEBAPI_DB_username=mhmcb
-# ARG WEBAPI_DB_password=Password123
-# ARG WEBAPI_SCHEMA=webapi
-# ARG SECURITY_PROVIDER=DisabledSecurity
-# ARG SECURITY_ORIGIN=*
-# ARG SSL_ENABLED=false
-# ARG GIT_BRANCH=feature/missouri-bmi
-
-ARG ATLAS_URL=https://atlas-dev.nextgenbmi.umsystem.edu/atlas/
-ARG WEBAPI_URL=https://ohdsi-webapi-dev.nextgenbmi.umsystem.edu/WebAPI/
-ARG WEBAPI_DB=jdbc:postgresql://ohdsi-atlas.ctsvcfrduobf.us-east-2.rds.amazonaws.com:5432/ohdsi_webapi
-ARG WEBAPI_DB_username=mhmcb
-ARG WEBAPI_DB_password=Password123
-ARG WEBAPI_SCHEMA=webapi
-ARG SECURITY_PROVIDER=AtlasRegularSecurity
-ARG SECURITY_ORIGIN=*
-ARG SSL_ENABLED=false
-
-ARG GIT_BRANCH=feature/missouri-bmi
-ARG GIT_COMMIT_ID_ABBREV=unknown
-
-ARG MAVEN_PROFILE=webapi-docker
+ARG MAVEN_PROFILE=webapi-docker,webapi-snowflake
 ARG MAVEN_PARAMS="-DskipTests=true -DskipUnitTests=true" # can use maven options, e.g. -DskipTests=true -DskipUnitTests=true
 
 ARG OPENTELEMETRY_JAVA_AGENT_VERSION=1.17.0
@@ -38,6 +14,11 @@ RUN mkdir .git \
     && mvn package \
      -P${MAVEN_PROFILE}
 
+ARG GIT_BRANCH=unknown
+ARG GIT_COMMIT_ID_ABBREV=unknown
+
+# Copy your settings.xml into the Docker image
+COPY .settings/settings.xml /root/.m2/settings.xml
 
 # Compile code and repackage it
 COPY src /code/src

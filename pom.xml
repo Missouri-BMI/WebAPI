@@ -43,20 +43,20 @@
 
     <!-- Primary DataSource -->
     <!-- default sql server - TODO How about making postgres the default (e.g. in line with open source tech)? -alexfranken -->
-    <datasource.driverClassName>org.postgresql.Driver</datasource.driverClassName>
-    <datasource.url>${env.WEBAPI_DB}</datasource.url>
-    <datasource.username>${env.WEBAPI_DB_username}</datasource.username>
-    <datasource.password>${env.WEBAPI_DB_password}</datasource.password>
+    <datasource.driverClassName>com.microsoft.sqlserver.jdbc.SQLServerDriver</datasource.driverClassName>
+    <datasource.url>jdbc:sqlserver://serverName;databaseName=databaseName</datasource.url>
+    <datasource.username>user</datasource.username>
+    <datasource.password>password</datasource.password>
     <!--<datasource.validationQuery>SELECT 1</datasource.validationQuery>-->
-    <datasource.dialect>postgresql</datasource.dialect>
-    <datasource.ohdsi.schema>${env.WEBAPI_SCHEMA}</datasource.ohdsi.schema>
-    <datasource.dialect.source>postgresql</datasource.dialect.source>
+    <datasource.dialect>sql server</datasource.dialect>
+    <datasource.ohdsi.schema>dbo</datasource.ohdsi.schema>
+    <datasource.dialect.source>sql server</datasource.dialect.source>
     <!-- DB Change Management / Migration -->
-    <flyway.datasource.driverClassName>org.postgresql.Driver</flyway.datasource.driverClassName>
-    <flyway.datasource.url>${env.WEBAPI_DB}</flyway.datasource.url>
-    <flyway.datasource.username>${env.WEBAPI_DB_username}</flyway.datasource.username>
-    <flyway.datasource.password>${env.WEBAPI_DB_password}</flyway.datasource.password>
-    <flyway.locations>classpath:db/migration/postgresql</flyway.locations>
+    <flyway.datasource.driverClassName>com.microsoft.sqlserver.jdbc.SQLServerDriver</flyway.datasource.driverClassName>
+    <flyway.datasource.url>jdbc:sqlserver://serverName</flyway.datasource.url>
+    <flyway.datasource.username>userWithWritePrivs</flyway.datasource.username>
+    <flyway.datasource.password>password</flyway.datasource.password>
+    <flyway.locations>classpath:db/migration/sqlserver</flyway.locations>
     <!-- Note: Schema name is case-sensitive. -->
     <flyway.schemas>${datasource.ohdsi.schema}</flyway.schemas>
     <flyway.validateOnMigrate>false</flyway.validateOnMigrate>
@@ -77,10 +77,11 @@
     <spring.batch.repository.tableprefix>${datasource.ohdsi.schema}.BATCH_</spring.batch.repository.tableprefix>
     <spring.batch.repository.isolationLevelForCreate>ISOLATION_READ_COMMITTED</spring.batch.repository.isolationLevelForCreate>
     <spring.profiles.active>default</spring.profiles.active>
-    <security.provider>${env.SECURITY_PROVIDER}</security.provider>
+
+    <security.provider>DisabledSecurity</security.provider>
     <security.token.expiration>43200</security.token.expiration>
-    <security.origin>${env.SECURITY_ORIGIN}</security.origin>
-    <security.ssl.enabled>${env.SSL_ENABLED}</security.ssl.enabled>
+    <security.origin>http://localhost</security.origin>
+    <security.ssl.enabled>false</security.ssl.enabled>
     <security.oauth.callback.ui>http://localhost/Atlas/#/welcome</security.oauth.callback.ui>
     <security.oauth.callback.api>http://localhost:8080/WebAPI/user/oauth/callback</security.oauth.callback.api>
     <!-- Available options for callback urlResolver are: query and path -->
@@ -144,7 +145,7 @@
     <security.db.datasource.username>${datasource.username}</security.db.datasource.username>
     <security.db.datasource.password>${datasource.password}</security.db.datasource.password>
 
-    <security.db.datasource.authenticationQuery>select password,firstName,middleName,lastName from atlas_security.demo_security where username = ?</security.db.datasource.authenticationQuery>
+    <security.db.datasource.authenticationQuery>select password from ${security.db.datasource.schema}.users where lower(email) = lower(?)</security.db.datasource.authenticationQuery>
     <use.single.connect.datasource.for.testing>true</use.single.connect.datasource.for.testing>
 
     <security.googleIap.cloudProjectId></security.googleIap.cloudProjectId>
@@ -158,14 +159,14 @@
 
     <security.saml.enabled>false</security.saml.enabled>
     <security.saml.entityId></security.saml.entityId>
-    <security.saml.idpMetadataLocation>classpath:saml/dev/shib-idp-metadata.xml</security.saml.idpMetadataLocation>
+    <security.saml.idpMetadataLocation></security.saml.idpMetadataLocation>
     <security.saml.keyManager.keyStoreFile></security.saml.keyManager.keyStoreFile>
     <security.saml.keyManager.storePassword></security.saml.keyManager.storePassword>
     <security.saml.keyManager.defaultKey></security.saml.keyManager.defaultKey>
     <security.saml.keyManager.passwords.arachnenetwork></security.saml.keyManager.passwords.arachnenetwork>
-    <security.saml.metadataLocation>saml/dev/shib-sp-metadata.xml </security.saml.metadataLocation>
-    <security.saml.callbackUrl>http://localhost:8080/WebAPI/user/saml/callback</security.saml.callbackUrl>
-    <security.saml.sloUrl>https://localhost:8443/cas/logout</security.saml.sloUrl>
+    <security.saml.metadataLocation></security.saml.metadataLocation>
+    <security.saml.callbackUrl></security.saml.callbackUrl>
+    <security.saml.sloUrl></security.saml.sloUrl>
     <security.saml.maximumAuthenticationLifetime>60</security.saml.maximumAuthenticationLifetime>
 
     <security.auth.windows.enabled>true</security.auth.windows.enabled>
@@ -227,8 +228,8 @@
     <spring.jpa.properties.hibernate.generate_statistics>false</spring.jpa.properties.hibernate.generate_statistics>
     <spring.jpa.properties.hibernate.jdbc.batch_size>200</spring.jpa.properties.hibernate.jdbc.batch_size>
     <spring.jpa.properties.hibernate.order_inserts>true</spring.jpa.properties.hibernate.order_inserts>
-    <logging.level.root>debug</logging.level.root>
-    <logging.level.org.ohdsi>debug</logging.level.org.ohdsi>
+    <logging.level.root>info</logging.level.root>
+    <logging.level.org.ohdsi>info</logging.level.org.ohdsi>
     <logging.level.org.springframework.orm>info</logging.level.org.springframework.orm>
     <logging.level.org.springframework.jdbc>info</logging.level.org.springframework.jdbc>
     <logging.level.org.springframework.web>info</logging.level.org.springframework.web>
@@ -1300,15 +1301,15 @@
         <miredot.phase>none</miredot.phase>
         <skipTests>true</skipTests>
         <datasource.driverClassName>org.postgresql.Driver</datasource.driverClassName>
-        <datasource.url>${env.WEBAPI_DB}</datasource.url>
-        <datasource.username>${env.WEBAPI_DB_username}</datasource.username>
-        <datasource.password>${env.WEBAPI_DB_password}</datasource.password>
+        <datasource.url>jdbc:postgresql://54.209.111.128:5432/vocabularyv5</datasource.url>
+        <datasource.username>USER</datasource.username>
+        <datasource.password>PASS</datasource.password>
         <datasource.dialect>postgresql</datasource.dialect>
-        <datasource.ohdsi.schema>${env.WEBAPI_SCHEMA}</datasource.ohdsi.schema>
+        <datasource.ohdsi.schema>ohdsi</datasource.ohdsi.schema>
         <flyway.datasource.driverClassName>${datasource.driverClassName}</flyway.datasource.driverClassName>
         <flyway.datasource.url>${datasource.url}</flyway.datasource.url>
-        <flyway.datasource.username>${env.WEBAPI_DB_username}</flyway.datasource.username>
-        <flyway.datasource.password>${env.WEBAPI_DB_password}</flyway.datasource.password>
+        <flyway.datasource.username>userWithWritesToOhdsiSchema</flyway.datasource.username>
+        <flyway.datasource.password>PASS</flyway.datasource.password>
         <flyway.schemas>${datasource.ohdsi.schema}</flyway.schemas>
         <flyway.placeholders.ohdsiSchema>${datasource.ohdsi.schema}</flyway.placeholders.ohdsiSchema>
         <flyway.locations>classpath:db/migration/postgresql</flyway.locations>
@@ -1318,17 +1319,9 @@
         <security.db.datasource.driverClassName>${datasource.driverClassName}</security.db.datasource.driverClassName>
         <security.db.datasource.username>${datasource.username}</security.db.datasource.username>
         <security.db.datasource.password>${datasource.password}</security.db.datasource.password>
-        <security.db.datasource.authenticationQuery>select password,firstName,middleName,lastName from atlas_security.demo_security where username = ?</security.db.datasource.authenticationQuery>
-        <snowflake.enabled>true</snowflake.enabled>
-        <snowflake.driver.version>3.13.22</snowflake.driver.version>
+        <security.db.datasource.authenticationQuery>select password from ${security.db.datasource.schema}.users_data where \
+          lower(email) = lower(?)</security.db.datasource.authenticationQuery>
       </properties>
-      <dependencies>
-        <dependency>
-          <groupId>net.snowflake</groupId>
-          <artifactId>snowflake-jdbc</artifactId>
-          <version>${snowflake.driver.version}</version>
-        </dependency>
-      </dependencies>
       <repositories>
 	<repository>
           <id>ohdsi.snapshots</id>
