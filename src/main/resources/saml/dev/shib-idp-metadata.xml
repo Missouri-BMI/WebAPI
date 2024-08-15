@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor entityID="https://shib-idp.umsystem.edu/idp/shibboleth"
+                  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                  xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                  xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">umsystem.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">missouri.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">mst.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">umkc.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">umh.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">mizzou.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">umsl.edu</shibmd:Scope>
+        </Extensions>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+                        MIIGXzCCBEegAwIBAgIJAKWtz8DsmzihMA0GCSqGSIb3DQEBBQUAMIHFMQswCQYD
+                        VQQGEwJVUzERMA8GA1UECAwITWlzc291cmkxETAPBgNVBAcMCENvbHVtYmlhMSYw
+                        JAYDVQQKDB1Vbml2ZXJzaXR5IG9mIE1pc3NvdXJpIFN5c3RlbTEeMBwGA1UECwwV
+                        RGl2aXNpb24gb2YgSVQgLSBJU0FNMR4wHAYDVQQDDBVzaGliLWlkcC51bXN5c3Rl
+                        bS5lZHUxKDAmBgkqhkiG9w0BCQEWGXNoaWItc3VwcG9ydEB1bXN5c3RlbS5lZHUw
+                        HhcNMTQwNDA5MTY1NDMwWhcNMzQwNDA5MTY1NDMwWjCBxTELMAkGA1UEBhMCVVMx
+                        ETAPBgNVBAgMCE1pc3NvdXJpMREwDwYDVQQHDAhDb2x1bWJpYTEmMCQGA1UECgwd
+                        VW5pdmVyc2l0eSBvZiBNaXNzb3VyaSBTeXN0ZW0xHjAcBgNVBAsMFURpdmlzaW9u
+                        IG9mIElUIC0gSVNBTTEeMBwGA1UEAwwVc2hpYi1pZHAudW1zeXN0ZW0uZWR1MSgw
+                        JgYJKoZIhvcNAQkBFhlzaGliLXN1cHBvcnRAdW1zeXN0ZW0uZWR1MIICIjANBgkq
+                        hkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuTe7xAgB7qvskFcQOFZWVEKMx/jCyFZf
+                        ORYXEYi/DldPD3KnJwOQXELZUo70FPGkSe1BTXDgD+lZhgsYJ9PH3mvDyUCCp3Xk
+                        yph8aREA8Finsea2Rd7MZ07tKN7MMIvT/+wxYbQKApbiSz/HI6iJTsqIEtFwx9F0
+                        /b1mDVl4VMIYuGfz9QTkV78Bp8kEz07f7VpyAP6kdYiTmfpwPgw3ZeLS8Btdp4bM
+                        2Kx6YMndAkp434YVU2I7MpFnu74nRrSyvxfna807rW7v7rkdfe5cH5IaSj5QlcZy
+                        eluiJrQZcWVFMtbK3ncCPgHlrFngQJWThXSY/ImyIjMQgjTg2X08Eo7x56jBR5wK
+                        LF8pgWANSuIfu3R58WhM0BuNY/eW15g4+TYkuYII/gyEGc+jeLRCAhnPPb1CSyvu
+                        lvJCwONcFsaiw89C5mRMDZTEK5dxVSJIP5Nr7Gc14dnNHdKiSnMLpr+yD0PecH3d
+                        EBvUg9iQnMUPgJ8TCtL6l0TYmNB2s2R0bV3OtUNdacIzUhqcc94GD/gvHDtd8ZUR
+                        vcYoUyj+jw5G0g7hP1nfXGTzaVYgUGPDtZz5EkHQbGepB2616e/P2LNW+MEu5B20
+                        l4f3Hnmf3mCamDX2/sa7YPUZijktcaBZjNVQ/yNYN+DQFuhLhldQrfX1dUo8PLCh
+                        GeHSvAlFPr0CAwEAAaNQME4wHQYDVR0OBBYEFPHqh0NX2jMWtQ0IK+BPTIgNgT0t
+                        MB8GA1UdIwQYMBaAFPHqh0NX2jMWtQ0IK+BPTIgNgT0tMAwGA1UdEwQFMAMBAf8w
+                        DQYJKoZIhvcNAQEFBQADggIBAJxnu+vjpnWF8fSMGOZIMboM3XcO6MpHCg3Lx1QF
+                        +QFuPiGQ9Zz9iphL7FEukFEtBw4KspCHEYLT5VscMd1hts5C78TWYhuetzsMPJTi
+                        2XoMY7Kj37HCw/nQE3FSZPD7XLsV7jLL75BhXuFicdeF1K2vUCYUYDeex1CCr+do
+                        RNzLKtX6P5nuNNyUWfeq22wcErq1uF8sH4Tj4EwDwUNkT2UstoojGhfLIEAuLurf
+                        Pf1lwZcRTNNrIPhFaDROz08rTW9aO0GWuvaHu8K3FgR7SfLjBiSfv/SruF2aSlmg
+                        cVXiD59YVP6kmsDQ5kn7HCEYQ7X0UGL30ms90QPeAbg4jFHGG07Gtpw4swlmvV5h
+                        erIgIQKLLQmz9r9m4BcYy4JU6/Y3wlgrQLU7ZnAo1z4b4LWFDd3GW8jx1ev13vrX
+                        GilxOAYqD/dn9JE+f20/uJ85UVu56uqg8kGrpSA/feVlJAaV0u8L5XROJ14NCgLx
+                        814bMhiUInpshRnoj3WznhyxbuMSF6eHetcjob8zuAXCROcgPjyZTXy8LQ88QVKQ
+                        7QXNXjur/GReOr/JeRkzV1454cg8GS6N+m1Qd7Z7XDANJZ27ptO0Mp0sL7eJRPWe
+                        0uQ2ga4iAWdPhlJEgCHMPKfizeqZKMV4nY7i6TygxvhVTWYm5GhpOgQj4r8C73Mr
+                        br3E
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
+                                   Location="https://shib-idp.umsystem.edu:8443/idp/profile/SAML1/SOAP/ArtifactResolution"
+                                   index="1"/>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                                   Location="https://shib-idp.umsystem.edu:8443/idp/profile/SAML2/SOAP/ArtifactResolution"
+                                   index="2"/>
+
+        <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"
+                             Location="https://shib-idp.umsystem.edu/idp/profile/Shibboleth/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                             Location="https://shib-idp.umsystem.edu/idp/profile/SAML2/POST/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign"
+                             Location="https://shib-idp.umsystem.edu/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                             Location="https://shib-idp.umsystem.edu/idp/profile/SAML2/Redirect/SSO"/>
+    </IDPSSODescriptor>
+
+    <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">umsystem.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">missouri.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">mst.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">umkc.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">umh.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">mizzou.edu</shibmd:Scope>
+            <shibmd:Scope regexp="false">umsl.edu</shibmd:Scope>
+        </Extensions>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+                        MIIGXzCCBEegAwIBAgIJAKWtz8DsmzihMA0GCSqGSIb3DQEBBQUAMIHFMQswCQYD
+                        VQQGEwJVUzERMA8GA1UECAwITWlzc291cmkxETAPBgNVBAcMCENvbHVtYmlhMSYw
+                        JAYDVQQKDB1Vbml2ZXJzaXR5IG9mIE1pc3NvdXJpIFN5c3RlbTEeMBwGA1UECwwV
+                        RGl2aXNpb24gb2YgSVQgLSBJU0FNMR4wHAYDVQQDDBVzaGliLWlkcC51bXN5c3Rl
+                        bS5lZHUxKDAmBgkqhkiG9w0BCQEWGXNoaWItc3VwcG9ydEB1bXN5c3RlbS5lZHUw
+                        HhcNMTQwNDA5MTY1NDMwWhcNMzQwNDA5MTY1NDMwWjCBxTELMAkGA1UEBhMCVVMx
+                        ETAPBgNVBAgMCE1pc3NvdXJpMREwDwYDVQQHDAhDb2x1bWJpYTEmMCQGA1UECgwd
+                        VW5pdmVyc2l0eSBvZiBNaXNzb3VyaSBTeXN0ZW0xHjAcBgNVBAsMFURpdmlzaW9u
+                        IG9mIElUIC0gSVNBTTEeMBwGA1UEAwwVc2hpYi1pZHAudW1zeXN0ZW0uZWR1MSgw
+                        JgYJKoZIhvcNAQkBFhlzaGliLXN1cHBvcnRAdW1zeXN0ZW0uZWR1MIICIjANBgkq
+                        hkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuTe7xAgB7qvskFcQOFZWVEKMx/jCyFZf
+                        ORYXEYi/DldPD3KnJwOQXELZUo70FPGkSe1BTXDgD+lZhgsYJ9PH3mvDyUCCp3Xk
+                        yph8aREA8Finsea2Rd7MZ07tKN7MMIvT/+wxYbQKApbiSz/HI6iJTsqIEtFwx9F0
+                        /b1mDVl4VMIYuGfz9QTkV78Bp8kEz07f7VpyAP6kdYiTmfpwPgw3ZeLS8Btdp4bM
+                        2Kx6YMndAkp434YVU2I7MpFnu74nRrSyvxfna807rW7v7rkdfe5cH5IaSj5QlcZy
+                        eluiJrQZcWVFMtbK3ncCPgHlrFngQJWThXSY/ImyIjMQgjTg2X08Eo7x56jBR5wK
+                        LF8pgWANSuIfu3R58WhM0BuNY/eW15g4+TYkuYII/gyEGc+jeLRCAhnPPb1CSyvu
+                        lvJCwONcFsaiw89C5mRMDZTEK5dxVSJIP5Nr7Gc14dnNHdKiSnMLpr+yD0PecH3d
+                        EBvUg9iQnMUPgJ8TCtL6l0TYmNB2s2R0bV3OtUNdacIzUhqcc94GD/gvHDtd8ZUR
+                        vcYoUyj+jw5G0g7hP1nfXGTzaVYgUGPDtZz5EkHQbGepB2616e/P2LNW+MEu5B20
+                        l4f3Hnmf3mCamDX2/sa7YPUZijktcaBZjNVQ/yNYN+DQFuhLhldQrfX1dUo8PLCh
+                        GeHSvAlFPr0CAwEAAaNQME4wHQYDVR0OBBYEFPHqh0NX2jMWtQ0IK+BPTIgNgT0t
+                        MB8GA1UdIwQYMBaAFPHqh0NX2jMWtQ0IK+BPTIgNgT0tMAwGA1UdEwQFMAMBAf8w
+                        DQYJKoZIhvcNAQEFBQADggIBAJxnu+vjpnWF8fSMGOZIMboM3XcO6MpHCg3Lx1QF
+                        +QFuPiGQ9Zz9iphL7FEukFEtBw4KspCHEYLT5VscMd1hts5C78TWYhuetzsMPJTi
+                        2XoMY7Kj37HCw/nQE3FSZPD7XLsV7jLL75BhXuFicdeF1K2vUCYUYDeex1CCr+do
+                        RNzLKtX6P5nuNNyUWfeq22wcErq1uF8sH4Tj4EwDwUNkT2UstoojGhfLIEAuLurf
+                        Pf1lwZcRTNNrIPhFaDROz08rTW9aO0GWuvaHu8K3FgR7SfLjBiSfv/SruF2aSlmg
+                        cVXiD59YVP6kmsDQ5kn7HCEYQ7X0UGL30ms90QPeAbg4jFHGG07Gtpw4swlmvV5h
+                        erIgIQKLLQmz9r9m4BcYy4JU6/Y3wlgrQLU7ZnAo1z4b4LWFDd3GW8jx1ev13vrX
+                        GilxOAYqD/dn9JE+f20/uJ85UVu56uqg8kGrpSA/feVlJAaV0u8L5XROJ14NCgLx
+                        814bMhiUInpshRnoj3WznhyxbuMSF6eHetcjob8zuAXCROcgPjyZTXy8LQ88QVKQ
+                        7QXNXjur/GReOr/JeRkzV1454cg8GS6N+m1Qd7Z7XDANJZ27ptO0Mp0sL7eJRPWe
+                        0uQ2ga4iAWdPhlJEgCHMPKfizeqZKMV4nY7i6TygxvhVTWYm5GhpOgQj4r8C73Mr
+                        br3E
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
+                          Location="https://shib-idp.umsystem.edu:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                          Location="https://shib-idp.umsystem.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+
+        <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+
+    </AttributeAuthorityDescriptor>
+
+    <Organization>
+        <OrganizationName xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en">University of Missouri System</OrganizationName>
+        <OrganizationDisplayName xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en">University of Missouri System</OrganizationDisplayName>
+        <OrganizationURL xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en">http://www.umsystem.edu/</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="technical">
+        <GivenName>UM Shibboleth Tech</GivenName>
+        <EmailAddress>shib-tech@umsystem.edu</EmailAddress>
+    </ContactPerson>
+    <ContactPerson contactType="administrative">
+        <GivenName>UM Shibboleth Admin</GivenName>
+        <EmailAddress>shib-admin@umsystem.edu</EmailAddress>
+    </ContactPerson>
+    <ContactPerson contactType="support">
+        <GivenName>UM DoIT Shibboleth Support</GivenName>
+        <EmailAddress>shib-support@umsystem.edu</EmailAddress>
+    </ContactPerson>
+    <ContactPerson contactType="other"
+                   xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                   xmlns:icmd="http://id.incommon.org/metadata"
+                   icmd:contactType="http://id.incommon.org/metadata/contactType/security">
+        <GivenName>UM Shibboleth Security</GivenName>
+        <EmailAddress>shib-security@umsystem.edu</EmailAddress>
+    </ContactPerson>
+</EntityDescriptor>
