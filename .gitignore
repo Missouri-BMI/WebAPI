@@ -21,3 +21,5 @@ sandbox/
 **/resources/config/application*-dev-*.yml
 /.vscode
 /.run
+src/main/resources/saml/keygen.sh
+src/main/resources/saml/samlKeystore.jks
