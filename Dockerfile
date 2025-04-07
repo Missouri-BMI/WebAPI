@@ -1,11 +1,11 @@
-FROM maven:3.6-jdk-11 as builder
+FROM maven:3.9-eclipse-temurin-11 as builder
 
 WORKDIR /code
 
-ARG MAVEN_PROFILE=webapi-docker
-ARG MAVEN_PARAMS="" # can use maven options, e.g. -DskipTests=true -DskipUnitTests=true
+ARG MAVEN_PROFILE=webapi-docker,webapi-snowflake
+ARG MAVEN_PARAMS="-DskipTests=true -DskipUnitTests=true" # can use maven options, e.g. -DskipTests=true -DskipUnitTests=true
 
-ARG OPENTELEMETRY_JAVA_AGENT_VERSION=1.17.0
+ARG OPENTELEMETRY_JAVA_AGENT_VERSION=2.90
 RUN curl -LSsO https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${OPENTELEMETRY_JAVA_AGENT_VERSION}/opentelemetry-javaagent.jar
 
 # Download dependencies
@@ -16,6 +16,9 @@ RUN mkdir .git \
 
 ARG GIT_BRANCH=unknown
 ARG GIT_COMMIT_ID_ABBREV=unknown
+
+# Copy your settings.xml into the Docker image
+COPY .settings/settings.xml /root/.m2/settings.xml
 
 # Compile code and repackage it
 COPY src /code/src
@@ -65,3 +68,5 @@ USER 101
 CMD exec java ${DEFAULT_JAVA_OPTS} ${JAVA_OPTS} \
     -cp ".:WebAPI.jar:WEB-INF/lib/*.jar${CLASSPATH}" \
     org.springframework.boot.loader.WarLauncher
+
+VOLUME [ "/tmp" ]
