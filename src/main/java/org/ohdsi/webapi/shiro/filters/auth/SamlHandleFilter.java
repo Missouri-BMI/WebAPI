@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java.util.List;
 
 import static org.ohdsi.webapi.shiro.management.AtlasSecurity.AUTH_CLIENT_ATTRIBUTE;
 import static org.ohdsi.webapi.shiro.management.AtlasSecurity.AUTH_CLIENT_SAML;
@@ -66,8 +67,25 @@ public class SamlHandleFilter extends AtlasAuthFilter {
                 }
                 SAML2Credentials credentials = client.getCredentials(context).get();
                 SAML2Profile samlProfile = (SAML2Profile)client.getUserProfile(credentials, context).get();
+                
+                String identifier = null;
 
-                token = new JwtAuthToken(samlProfile.getId());
+                // Try to extract eppn from attributes
+                Object eppnAttr = samlProfile.getAttribute("eduPersonPrincipalName");
+
+                if (eppnAttr instanceof List<?>) {
+                    List<?> values = (List<?>) eppnAttr;
+                    if (!values.isEmpty() && values.get(0) instanceof String) {
+                        identifier = (String) values.get(0);
+                    }
+                }
+
+                // Fallback to NameID if eppn not found
+                if (identifier == null) {
+                    identifier = samlProfile.getId();
+                }
+
+                token = new JwtAuthToken(identifier);
             }
         }
         return token;

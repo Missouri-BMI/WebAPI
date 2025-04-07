@@ -17,8 +17,12 @@ RUN mkdir .git \
 ARG GIT_BRANCH=unknown
 ARG GIT_COMMIT_ID_ABBREV=unknown
 
-# Copy your settings.xml into the Docker image
-COPY .settings/settings.xml /root/.m2/settings.xml
+# Add argument to specify environment (dev or prod)
+ARG ENV=dev
+
+# Copy the appropriate settings.xml into the Docker image based on the environment
+COPY .settings/${ENV}/settings.xml /root/.m2/settings.xml
+COPY .settings/${ENV}/rsa_key.p8 /tmp/rsa_key.p8
 
 # Compile code and repackage it
 COPY src /code/src
@@ -44,12 +48,17 @@ ENV CLASSPATH=""
 # Default Java options. The first entry is a fix for when java reads secure random numbers:
 # in a containerized system using /dev/random may reduce entropy too much, causing slowdowns.
 # https://ruleoftech.com/2016/avoiding-jvm-delays-caused-by-random-number-generation
-ENV DEFAULT_JAVA_OPTS="-Djava.security.egd=file:///dev/./urandom"
+ENV DEFAULT_JAVA_OPTS="-Djava.security.egd=file:///dev/./urandom -Dnet.snowflake.jdbc.enableBouncyCastle=true"
 
 # set working directory to a fixed WebAPI directory
 WORKDIR /var/lib/ohdsi/webapi
 
 COPY --from=builder /code/opentelemetry-javaagent.jar .
+
+COPY --from=builder /tmp/rsa_key.p8 .
+# Set permissions and ownership before switching user
+RUN chown 101:0 /var/lib/ohdsi/webapi/rsa_key.p8 && \
+    chmod 400 /var/lib/ohdsi/webapi/rsa_key.p8
 
 # deploy the just built OHDSI WebAPI war file
 # copy resources in order of fewest changes to most changes.
